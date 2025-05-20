@@ -161,8 +161,27 @@ describe('Basic user flow for Website', () => {
 
   // Checking to make sure that if you remove all of the items from the cart that the cart
   // number in the top right of the screen is 0
-  it.skip('Checking number of items in cart on screen after removing from cart', async () => {
+  it('Checking number of items in cart on screen after removing from cart', async () => {
     console.log('Checking number of items in cart on screen...');
+
+    const prodItems = await page.$$('product-item');
+    for(let i = 0; i < prodItems.length; i++) {
+      const prodItem = prodItems[i];
+      const shadowRoot = await prodItem.getProperty('shadowRoot');
+      const button = await shadowRoot.$('button');
+      const innerTextHandle = await button.getProperty('innerText');
+      const innerText = await innerTextHandle.jsonValue();
+      
+      if(innerText == 'Remove from Cart'){
+        await button.click();
+      }
+
+    }
+    const cartCountHandle = await page.$('#cart-count');
+    const cartCountText = await cartCountHandle.getProperty('innerText');
+    const cartCount = await cartCountText.jsonValue();
+
+    expect(parseInt(cartCount)).toBe(0);
 
     /**
      **** TODO - STEP 6 **** 
@@ -171,7 +190,7 @@ describe('Basic user flow for Website', () => {
      * Remember to remove the .skip from this it once you are finished writing this test.
      */
 
-  }, 10000);
+  }, 20000);
 
   // Checking to make sure that it remembers us removing everything from the cart
   // after we refresh the page
