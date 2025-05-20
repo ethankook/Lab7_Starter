@@ -4,3 +4,4 @@ Ethan Kook - A18092777
 3) Navigation mode analyzes the page right after it loads while snapshot analyzes it in its current state. 
 4) Based on the lighthouse results, properly sizing images can potentially save 518KiB and serving images in next-gen formats such as WebP and AVIF, which often provide better compression than PNG or JPEG, can potentially save 165KiB. We can also add a `<meta name="viewport">` tag, which optimizes the app for mobile screen sizes, and also prevents a 300 millisecond delay to user input. 
 
+Screenshot of test results: /ResultsScreenshot.png
